@@ -28,16 +28,30 @@ class ProvisionClient:
             raise ProvisionError(ErrorCode.INVALID_POP, "PoP is required")
         if not ssid:
             raise ProvisionError(ErrorCode.CUSTOM_DATA_INVALID, "ssid is required")
-        return ProvisionResult(code=int(ErrorCode.OK), state=ProvisionState.PROVISION_DONE, message=f"provision request submitted to {name}")
+        # TODO: Integrate official ESP-IDF Protocomm provisioning client.
+        raise ProvisionError(
+            ErrorCode.UNKNOWN_ERROR,
+            f"provision flow not implemented yet for {name}; integrate official esp_prov/protocomm client",
+        )
 
     async def status(self, *, name: str, pop: str) -> ProvisionResult:
         if not pop:
             raise ProvisionError(ErrorCode.INVALID_POP, "PoP is required")
-        return ProvisionResult(code=int(ErrorCode.OK), state=ProvisionState.WAITING_FOR_PROVISION, message=f"status queried for {name}")
+        # TODO: Query official provisioning status endpoint when client integration is complete.
+        return ProvisionResult(
+            code=int(ErrorCode.UNKNOWN_ERROR),
+            state=ProvisionState.WAITING_FOR_PROVISION.value,
+            message=f"status query placeholder for {name}",
+        )
 
     async def send_custom_data(self, *, name: str, pop: str, payload: str) -> ProvisionResult:
         if not pop:
             raise ProvisionError(ErrorCode.INVALID_POP, "PoP is required")
         if not payload:
             raise ProvisionError(ErrorCode.CUSTOM_DATA_INVALID, "payload is required")
-        return ProvisionResult(code=int(ErrorCode.OK), state=ProvisionState.CLOUD_BINDING, message=f"custom endpoint payload sent to {name}")
+        # TODO: Send payload to official custom endpoint once transport client is wired.
+        return ProvisionResult(
+            code=int(ErrorCode.UNKNOWN_ERROR),
+            state=ProvisionState.CLOUD_BINDING.value,
+            message=f"custom endpoint placeholder for {name}",
+        )

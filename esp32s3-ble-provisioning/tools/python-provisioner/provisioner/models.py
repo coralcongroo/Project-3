@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from enum import IntEnum
+from enum import Enum, IntEnum
 
 
-class ProvisionState(str):
+class ProvisionState(str, Enum):
     IDLE = "IDLE"
     WAITING_FOR_PROVISION = "WAITING_FOR_PROVISION"
     BLE_ADVERTISING = "BLE_ADVERTISING"

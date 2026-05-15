@@ -27,6 +27,7 @@ static esp_err_t custom_data_handler(uint32_t session_id, const uint8_t *inbuf, 
     ESP_LOGI(TAG, "custom-data recv: %s", json);
     ESP_ERROR_CHECK_WITHOUT_ABORT(nvs_storage_save_custom_json(json));
 
+    /* Provisioning manager frees response buffer after transport sends reply. */
     *outbuf = (uint8_t *)strdup(json);
     *outlen = (ssize_t)strlen(json);
     free(json);

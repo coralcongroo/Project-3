@@ -1,3 +1,5 @@
+import pytest
+
 from provisioner.errors import ProvisionError
 from provisioner.qr import parse_qr_json
 
@@ -11,9 +13,5 @@ def test_parse_qr_json_ok() -> None:
 
 
 def test_parse_qr_json_missing_field() -> None:
-    try:
+    with pytest.raises(ProvisionError, match="missing fields"):
         parse_qr_json('{"ver":"v1"}')
-    except ProvisionError as exc:
-        assert "missing fields" in exc.message
-        return
-    raise AssertionError("ProvisionError not raised")

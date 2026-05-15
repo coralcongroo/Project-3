@@ -81,9 +81,22 @@ esp_err_t provision_manager_start_if_needed(void) {
 }
 
 void provision_manager_reset_and_restart(void) {
+    esp_err_t err;
     ESP_LOGW(TAG, "reset provisioning and restart");
-    ESP_ERROR_CHECK_WITHOUT_ABORT(wifi_manager_reset_provisioning());
-    ESP_ERROR_CHECK_WITHOUT_ABORT(nvs_storage_set_wifi_provisioned(false));
-    ESP_ERROR_CHECK_WITHOUT_ABORT(wifi_prov_mgr_reset_sm_state_for_reprovision());
+    err = wifi_manager_reset_provisioning();
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "wifi reset failed: %s", esp_err_to_name(err));
+        return;
+    }
+    err = nvs_storage_set_wifi_provisioned(false);
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "nvs flag reset failed: %s", esp_err_to_name(err));
+        return;
+    }
+    err = wifi_prov_mgr_reset_sm_state_for_reprovision();
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "provisioning state reset failed: %s", esp_err_to_name(err));
+        return;
+    }
     ESP_ERROR_CHECK_WITHOUT_ABORT(provision_manager_start_if_needed());
 }
