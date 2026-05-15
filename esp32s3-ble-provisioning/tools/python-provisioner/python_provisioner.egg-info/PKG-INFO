@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: python-provisioner
+Version: 0.1.0
+Summary: ESP32-S3 BLE provisioning CLI tool
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: typer>=0.12
+Requires-Dist: bleak>=0.22
+
+# Python Provisioner
+
+## Commands
+- `provisioner scan`
+- `provisioner provision --name PROV_A1B2C3 --ssid MyWiFi --password 12345678 --pop 123456`
+- `provisioner status --name PROV_A1B2C3 --pop 123456`
+- `provisioner custom --name PROV_A1B2C3 --pop 123456 --json '{"bind_token":"xx"}'`
+- `provisioner parse-qr --qr '{...}'`
+
+> 说明：一期脚手架已预留与 ESP-IDF 官方 provisioning 流程兼容的客户端接口，具体 Protocomm 细节可在 `provision_client.py` 中接入官方 `esp_prov`/后续 SDK。

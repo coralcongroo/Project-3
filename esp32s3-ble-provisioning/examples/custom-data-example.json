@@ -1,0 +1,8 @@
+{
+  "product_id": "esp32s3_demo",
+  "device_id": "A1B2C3",
+  "bind_token": "token_xxx",
+  "region": "cn",
+  "mqtt_host": "mqtt.example.com",
+  "user_id": "u1001"
+}
