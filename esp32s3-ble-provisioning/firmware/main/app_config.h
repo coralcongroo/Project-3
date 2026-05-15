@@ -2,6 +2,10 @@
 
 #define APP_PROV_SCHEME_BLE 1
 #define APP_PROV_SECURITY 1
+/*
+ * WARNING: `APP_PROV_POP` is a development placeholder only.
+ * Manufacturing must inject a unique per-device PoP and must not ship with this value.
+ */
 #define APP_PROV_POP "123456"
 #define APP_CUSTOM_ENDPOINT_NAME "custom-data"
 #define APP_BUTTON_RESET_GPIO 0

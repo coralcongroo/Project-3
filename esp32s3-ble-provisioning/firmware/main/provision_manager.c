@@ -60,7 +60,7 @@ esp_err_t provision_manager_start_if_needed(void) {
     wifi_prov_mgr_is_provisioned(&provisioned);
     app_events_set_state(APP_STATE_WAITING_FOR_PROVISION);
 
-    if (provisioned || wifi_manager_is_provisioned() || nvs_storage_get_wifi_provisioned()) {
+    if (provisioned || nvs_storage_get_wifi_provisioned()) {
         ESP_LOGI(TAG, "already provisioned; connect Wi-Fi");
         app_events_set_state(APP_STATE_WIFI_CONNECTING);
         return wifi_manager_connect();
