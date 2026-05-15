@@ -21,13 +21,13 @@ def _print_error(err: ProvisionError) -> None:
 
 
 @app.command("scan")
-def scan(timeout: float = typer.Option(5.0, help="BLE 扫描时长（秒）")) -> None:
+def scan(timeout: float = typer.Option(5.0, help="BLE scan timeout in seconds / BLE 扫描时长（秒）")) -> None:
     devices = asyncio.run(scan_ble_devices(timeout=timeout))
     typer.echo(json.dumps([asdict(device) for device in devices], ensure_ascii=False, indent=2))
 
 
 @app.command("parse-qr")
-def parse_qr(qr: str = typer.Option(..., help="二维码 JSON 字符串")) -> None:
+def parse_qr(qr: str = typer.Option(..., help="QR code JSON string / 二维码 JSON 字符串")) -> None:
     try:
         payload = parse_qr_json(qr)
     except ProvisionError as err:
@@ -37,10 +37,10 @@ def parse_qr(qr: str = typer.Option(..., help="二维码 JSON 字符串")) -> No
 
 @app.command("provision")
 def provision(
-    name: str = typer.Option(..., help="目标设备名，如 PROV_A1B2C3"),
+    name: str = typer.Option(..., help="Target device name, e.g. PROV_A1B2C3 / 目标设备名"),
     ssid: str = typer.Option(..., help="Wi-Fi SSID"),
-    password: str = typer.Option("", help="Wi-Fi 密码"),
-    pop: str = typer.Option(..., help="PoP"),
+    password: str = typer.Option("", help="Wi-Fi password / Wi-Fi 密码"),
+    pop: str = typer.Option(..., help="Proof of possession / PoP"),
 ) -> None:
     client = ProvisionClient()
     try:
@@ -52,8 +52,8 @@ def provision(
 
 @app.command("status")
 def status(
-    name: str = typer.Option(..., help="目标设备名"),
-    pop: str = typer.Option(..., help="PoP"),
+    name: str = typer.Option(..., help="Target device name / 目标设备名"),
+    pop: str = typer.Option(..., help="Proof of possession / PoP"),
 ) -> None:
     client = ProvisionClient()
     try:
@@ -65,9 +65,9 @@ def status(
 
 @app.command("custom")
 def custom(
-    name: str = typer.Option(..., help="目标设备名"),
-    pop: str = typer.Option(..., help="PoP"),
-    json_data: str = typer.Option(..., "--json", help="自定义 endpoint JSON"),
+    name: str = typer.Option(..., help="Target device name / 目标设备名"),
+    pop: str = typer.Option(..., help="Proof of possession / PoP"),
+    json_data: str = typer.Option(..., "--json", help="Custom endpoint JSON / 自定义 endpoint JSON"),
 ) -> None:
     client = ProvisionClient()
     try:
