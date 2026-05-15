@@ -21,6 +21,11 @@ class ProvisionClient:
     """
 
     def __init__(self, transport: str = "ble") -> None:
+        if transport not in {"ble", "softap"}:
+            raise ProvisionError(
+                ErrorCode.CUSTOM_DATA_INVALID,
+                f"unsupported transport: {transport}",
+            )
         self.transport = transport
 
     async def provision(self, *, name: str, ssid: str, password: str, pop: str) -> ProvisionResult:

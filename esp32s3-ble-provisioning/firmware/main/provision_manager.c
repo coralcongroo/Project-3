@@ -98,5 +98,8 @@ void provision_manager_reset_and_restart(void) {
         ESP_LOGE(TAG, "provisioning state reset failed: %s", esp_err_to_name(err));
         return;
     }
-    ESP_ERROR_CHECK_WITHOUT_ABORT(provision_manager_start_if_needed());
+    err = provision_manager_start_if_needed();
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "restart provisioning failed: %s", esp_err_to_name(err));
+    }
 }

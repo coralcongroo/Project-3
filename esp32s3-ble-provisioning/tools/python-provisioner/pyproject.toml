@@ -5,8 +5,8 @@ description = "ESP32-S3 BLE provisioning CLI tool"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-  "typer>=0.12",
-  "bleak>=0.22"
+  "typer>=0.12,<1.0",
+  "bleak>=0.22,<1.0"
 ]
 
 [project.scripts]
