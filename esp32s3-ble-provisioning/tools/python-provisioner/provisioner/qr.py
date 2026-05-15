@@ -26,5 +26,5 @@ def parse_qr_json(raw: str) -> QrPayload:
         pop=str(data["pop"]),
         product_id=str(data["product_id"]),
         device_id=str(data["device_id"]),
-        username=str(data["username"]) if data.get("username") else None,
+        username=data.get("username") or None,
     )

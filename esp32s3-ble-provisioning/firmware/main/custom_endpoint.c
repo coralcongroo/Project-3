@@ -17,6 +17,10 @@ static esp_err_t custom_data_handler(uint32_t session_id, const uint8_t *inbuf, 
     if (inbuf == NULL || inlen <= 0 || outbuf == NULL || outlen == NULL) {
         return ESP_ERR_INVALID_ARG;
     }
+    if (memchr(inbuf, '\0', (size_t)inlen) != NULL) {
+        ESP_LOGW(TAG, "custom-data payload contains embedded null byte");
+        return ESP_ERR_INVALID_ARG;
+    }
 
     char *json = calloc(1, (size_t)inlen + 1);
     if (json == NULL) {

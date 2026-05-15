@@ -21,10 +21,10 @@ class ProvisionClient:
     """
 
     def __init__(self, transport: str = "ble") -> None:
-        if transport not in {"ble", "softap"}:
+        if transport != "ble":
             raise ProvisionError(
                 ErrorCode.CUSTOM_DATA_INVALID,
-                f"unsupported transport: {transport}",
+                f"unsupported transport for phase-1: {transport}",
             )
         self.transport = transport
 
