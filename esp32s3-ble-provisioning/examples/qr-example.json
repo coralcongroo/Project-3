@@ -1,0 +1,10 @@
+{
+  "ver": "v1",
+  "name": "PROV_A1B2C3",
+  "transport": "ble",
+  "security": 1,
+  "pop": "123456",
+  "product_id": "esp32s3_demo",
+  "device_id": "A1B2C3",
+  "username": ""
+}

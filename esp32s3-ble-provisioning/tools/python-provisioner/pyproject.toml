@@ -1,0 +1,17 @@
+[project]
+name = "python-provisioner"
+version = "0.1.0"
+description = "ESP32-S3 BLE provisioning CLI tool"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "typer>=0.12,<1.0",
+  "bleak>=0.22,<1.0"
+]
+
+[project.scripts]
+provisioner = "provisioner.cli:app"
+
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
